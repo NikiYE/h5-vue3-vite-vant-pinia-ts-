@@ -1,3 +1,7 @@
+@use "common.scss" as *;
 #__vconsole {
   display: none;
+}
+html {
+  background-color: #faf7fd;
 }

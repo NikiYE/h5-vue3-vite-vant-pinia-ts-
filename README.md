@@ -1,4 +1,4 @@
-# Vue 3 + TypeScript + Vite
+# h5-vue3-vite-vant-pinia-ts
 
 - eslint
 - prettier
