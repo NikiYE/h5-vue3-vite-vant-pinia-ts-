@@ -4,7 +4,7 @@
 - prettier
 - 自动格式化
   ```
-  // 可以运行`npm run lint`检查代码
+  // 可以运行`yarn lint`检查代码
   "lint": "eslint --ext .js,.vue,.ts src --fix"
   ```
 - tsconfig
