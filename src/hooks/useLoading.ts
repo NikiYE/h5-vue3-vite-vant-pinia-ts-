@@ -1,10 +1,8 @@
-import { showToast } from "vant";
+import { showToast, closeToast } from "vant";
 
 export function useLoading() {
-  let toast: any = null;
-
   const startLoading = () => {
-    toast = showToast({
+    showToast({
       type: "loading",
       duration: 0,
       forbidClick: true,
@@ -12,7 +10,7 @@ export function useLoading() {
     });
   };
   const stopLoading = () => {
-    toast && toast.clear();
+    closeToast();
   };
 
   onBeforeUnmount(stopLoading);

@@ -10,7 +10,9 @@ const route = useRoute();
 
 // 进入登录页时获取debug参数
 onMounted(() => {
-  debug.config(route.query.debug);
+  if (typeof route.query.debug === "string") {
+    debug.config(route.query.debug);
+  }
 });
 
 import { useLoading } from "@/hooks/useLoading";
@@ -25,6 +27,6 @@ const onSubmit = async () => {
   startLoading();
   const { code, result, message } = await Api.login(loginInfo);
   stopLoading();
-  // do something
+  console.log(code, result, message);
 };
 </script>

@@ -28,7 +28,7 @@ const routes: RouteRecordRaw[] = [
     component: () => import("@/pages/login/index.vue"),
   },
   {
-    path: "/question",
+    path: "/question/:id/:name",
     name: "question",
     meta: {
       title: "登录",

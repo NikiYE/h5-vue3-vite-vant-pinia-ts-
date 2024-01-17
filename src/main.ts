@@ -2,11 +2,11 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import store from "@/store";
 import router from "@/router"; // 导入路由
-
+import "@vant/touch-emulator";
 import "amfe-flexible"; //rem
 import "@/styles/index.scss";
 
-import { showToast } from "vant";
+// import { showToast } from "vant";
 import "vant/es/toast/style";
 
 // // Dialog

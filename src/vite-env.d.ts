@@ -1,7 +1,7 @@
 /// <reference types="vite/client" />
 
 // eslint-disable-next-line @typescript-eslint/ no-explicit-any, @typescript-eslint/ban-types
-const component: DefineComponent<{}, {}, any>;
+// const component: DefineComponent<{}, {}, any>;
 
 interface ImportMetaEnv {
   readonly VITE_APP_TITLE: string;

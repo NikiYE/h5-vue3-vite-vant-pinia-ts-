@@ -4,7 +4,7 @@ import { storage } from "./storage";
 const { MODE, VITE_BUILD_VCONSOLE } = import.meta.env;
 
 // 传入debug参数，将debug存入/移除localStorage
-const config = (debug: any) => {
+const config = (debug: string) => {
   if (debug === "1") {
     storage.setItem("debug", debug);
   } else {
@@ -17,9 +17,7 @@ const config = (debug: any) => {
 const init = () => {
   const vc = <HTMLElement>document.querySelector("#__vconsole");
   const debug = storage.getItem("debug");
-  console.log(VITE_BUILD_VCONSOLE, debug);
   if (VITE_BUILD_VCONSOLE === "true" && MODE === "development" && vc) {
-    console.log(vc, debug === "1");
     vc.style.display = debug === "1" ? "block" : "none";
   }
 };

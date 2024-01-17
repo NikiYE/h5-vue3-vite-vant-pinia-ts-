@@ -9,12 +9,20 @@
   --color-lighter: #eeeaff;
   --color-light: #bfb7e0;
   --color: #736696;
-  --main-color: #9076f8;
+  --color-main: #9076f8;
   --color-deep: #422889;
-  --color-deeper: #352566;  
+  --color-deeper: #352566;
   --color-gradient: linear-gradient(45deg, #b896ff -13.08%, #87dbff 82.12%);
-  --initial-gradient: linear-gradient(45deg, #ffffff, #ffffff); /* 你的初始渐变 */
-  --color-gradient-light: linear-gradient(45deg, #87dbff4f -13.08%, #b796ff38 82.12%);
+  --initial-gradient: linear-gradient(
+    45deg,
+    #ffffff,
+    #ffffff
+  ); /* 你的初始渐变 */
+  --color-gradient-light: linear-gradient(
+    45deg,
+    #87dbff4f -13.08%,
+    #b796ff38 82.12%
+  );
   --transition-padding: padding 0.3s;
   --transition: all 0.3s ease;
   --transition-bg: background-color 0.3s ease;
@@ -26,4 +34,7 @@
   --shadow: 0px 0px 30px rgba(138, 122, 215, 0.45);
   --shadow-light: 0px 0px 30px rgba(138, 122, 215, 0.15);
   --shadow-lighter: 0px 0px 30px rgba(138, 122, 215, 0.05);
+}
+:root:root {
+  --van-primary-color: #9076f8;
 }

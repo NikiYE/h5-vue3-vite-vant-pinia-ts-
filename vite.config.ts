@@ -45,7 +45,7 @@ export default ({ command, mode }) => {
       viteVConsole({
         entry: "src/main.ts",
         localEnabled: true,
-        enabled: env.VITE_BUILD_VCONSOLE === "true", //开启 vconsole 功能 localhost:5173/#/login?debug=1
+        enabled: env.VITE_BUILD_VCONSOLE == "true", //开启 vconsole 功能 localhost:5173/#/login?debug=1
         //在登录页url中添加一个参数 'debug'，登录时如果检测到 debug === 1，则不隐藏 vconsole
         config: {
           maxLogNumber: 1000,

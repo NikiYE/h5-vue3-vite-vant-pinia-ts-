@@ -1,5 +1,5 @@
 const storage = {
-  setItem(key: string, value: any) {
+  setItem(key: string, value: string) {
     // 如果 value 是对象，则使用 JSON.stringify，否则直接存储
     const valueToStore =
       typeof value === "object" ? JSON.stringify(value) : value;
