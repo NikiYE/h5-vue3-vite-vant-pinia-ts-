@@ -20,11 +20,12 @@ import "vant/es/toast/style";
 // // ImagePreview
 // import { showImagePreview } from 'vant';
 // import 'vant/es/image-preview/style';
-import VConsole from "vconsole";
-// 根据条件初始化 vConsole
-if (process.env.VITE_BUILD_VCONSOLE === "true") {
-  new VConsole();
-}
+
+// import VConsole from "vconsole";
+// // 根据条件初始化 vConsole
+// if (process.env.VITE_BUILD_VCONSOLE === "true") {
+//   new VConsole();
+// }
 const app = createApp(App);
 
 app.use(store);

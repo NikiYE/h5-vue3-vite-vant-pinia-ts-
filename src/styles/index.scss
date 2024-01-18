@@ -1,4 +1,6 @@
+@use "response.scss" as *;
 @use "common.scss" as *;
+
 #__vconsole {
   display: none;
 }
@@ -25,12 +27,12 @@ html {
   color: var(--color-lightest);
 }
 
+.van-radio {
+  margin-bottom: 10px;
+}
+
 .question-tip {
   font-size: 28px;
   padding: 10px 30px 30px;
   color: var(--color-lighter);
-}
-
-.van-radio {
-  margin-bottom: 10px;
 }

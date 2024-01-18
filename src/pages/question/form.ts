@@ -58,3 +58,108 @@ export const createAnswerForm = () => {
     otherGroup: "",
   });
 };
+
+const oldData = {
+  alwaysLocal: "2",
+  armyServe: "1",
+  birthDate: "1988,01",
+  enrollmentTime: "2024,01",
+  familyName: "陶",
+  firstName: "知微",
+  gender: "2",
+  graduationStatus: "2",
+  isLocal: "2",
+  literacy: "研究生",
+  maritalStatus: "1",
+  nation: "汉族",
+  occupation: "外出干部",
+  otherGroup: "意大利黑手党",
+  political: "其他党派人士",
+  prize: [
+    { name: "一级大法师", time: "1988,01", employer: "飞天大学" },
+    { name: "二级大法师", time: "1985,01", employer: "拉面大学" },
+  ],
+};
+const sendData = {
+  book_name: "第三方",
+  book_id: "6",
+  questions: [
+    {
+      question_id: 1,
+      answer: "陶",
+    },
+    {
+      question_id: 2,
+      answer: "知微",
+    },
+    {
+      question_id: 3,
+      answer: "1988,01",
+    },
+    {
+      question_id: 4,
+      answer: "是",
+    },
+    {
+      question_id: 5,
+      answer: "否",
+    },
+    {
+      question_id: 6,
+      answer: "女",
+    },
+    {
+      question_id: 7,
+      answer: "汉族",
+    },
+    {
+      question_id: 8,
+      answer: "其他党派人士",
+      answer_info: "意大利黑手党",
+    },
+    {
+      question_id: 9,
+      answer: "研究生",
+    },
+    {
+      question_id: 10,
+      answer: "飞天拉面大学",
+    },
+    {
+      question_id: 11,
+      answer: "在读",
+      answer_info: "2024,01",
+    },
+    {
+      question_id: 12,
+      answer: "离异",
+    },
+    {
+      question_id: 13,
+      answer: "退伍",
+    },
+    {
+      question_id: 14,
+      answer: "外出干部",
+    },
+    {
+      question_id: 16,
+      answer: "大法师",
+    },
+    {
+      question_id: 15,
+      answer: [
+        {
+          name: "一级大法师",
+          time: "1988,01",
+          employer: "飞天大学",
+        },
+        {
+          name: "二级大法师",
+          time: "1985,01",
+          employer: "拉面大学",
+        },
+      ],
+    },
+  ],
+};
