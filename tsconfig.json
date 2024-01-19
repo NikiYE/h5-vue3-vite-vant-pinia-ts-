@@ -11,9 +11,10 @@
     "sourceMap": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "esModuleInterop": true,
+    "esModuleInterop": true, 
     "lib": ["ESNext", "DOM"],
     "skipLibCheck": true,
+
     // 👆是初始化默认配置
     /*
       在ts中导入js模块会报错找不到类型声明

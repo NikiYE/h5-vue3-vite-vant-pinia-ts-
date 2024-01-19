@@ -4,6 +4,7 @@ import store from "@/store";
 import router from "@/router"; // 导入路由
 import "@vant/touch-emulator";
 import "amfe-flexible"; //rem
+import "@/styles/response.scss";
 import "@/styles/index.scss";
 
 // import { showToast } from "vant";
@@ -26,6 +27,7 @@ import "vant/es/toast/style";
 // if (process.env.VITE_BUILD_VCONSOLE === "true") {
 //   new VConsole();
 // }
+
 const app = createApp(App);
 
 app.use(store);

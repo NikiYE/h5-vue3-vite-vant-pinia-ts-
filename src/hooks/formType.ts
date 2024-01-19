@@ -3,7 +3,7 @@ export type PrizeDetail = {
   name: string;
   employer: string;
 };
-interface AnswerForm {
+export interface AnswerForm {
   familyName: string; // 姓氏
   firstName: string; //名字
   birthDate: string; // 出生年月      格式'1988,01'    ,隔开
@@ -35,6 +35,7 @@ export interface Option {
   skip?: string;
   needFilling?: boolean;
 }
+
 export const createAnswerForm = () => {
   return reactive<AnswerForm>({
     familyName: "",
@@ -57,6 +58,39 @@ export const createAnswerForm = () => {
     prize: [],
     otherGroup: "",
   });
+};
+
+interface Question {
+  question_id: number;
+  answer: string | PrizeDetail[]; //答案除了文本还有奖项的array
+  answer_info?: string;
+}
+export interface Transformed {
+  book_name: string;
+  book_id: string;
+  answers: Question[];
+}
+// 定义一个映射，将原始数据的键映射到问题 ID
+export const keyToQuestionIdMap = {
+  familyName: 1,
+  firstName: 2,
+  birthDate: 3,
+  isLocal: 4,
+  alwaysLocal: 5,
+  gender: 6,
+  nation: 7,
+  political: 8,
+  // otherGroup: 8,
+  literacy: 9,
+  school: 10,
+  graduationStatus: 11,
+  // graduationTime: 11,
+  // enrollmentTime: 11,
+  maritalStatus: 12,
+  armyServe: 13,
+  occupation: 14,
+  rank: 16,
+  prize: 15,
 };
 
 const oldData = {

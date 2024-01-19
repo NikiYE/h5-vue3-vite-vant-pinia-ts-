@@ -1,13 +1,22 @@
 <script setup lang="ts">
 import { onMounted } from "vue";
-
 import debug from "@/utils/debug";
 
-// 因为debug是存入localStorage中的，刷新页面会从localStorage取出，根据debug控制是否隐藏
+import { nextTick, provide, ref } from "vue";
+const isRouter = ref(true);
+const reload = () => {
+  isRouter.value = false;
+  nextTick(() => {
+    isRouter.value = true;
+  });
+};
+provide("reload", reload);
+
+
 onMounted(() => {
   debug.init();
 });
-
+// 因为debug是存入localStorage中的，刷新页面会从localStorage取出，根据debug控制是否隐藏
 //登录时在url中添加参数 debug=1 即可开启
 // http://localhost:5173/#/login?debug=1
 
@@ -15,7 +24,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <router-view />
+  <router-view v-if="isRouter" />
 </template>
 
 <style scoped></style>

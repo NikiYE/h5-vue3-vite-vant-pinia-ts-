@@ -34,6 +34,12 @@ module.exports = {
       exclude: [/^(?!.*node_modules\/vant)/],
       // include: [/node_modules\/vant/],
     }),
+    // 非vant
+    // px2viewport({
+    //   ...basePx2viewport,
+    //   viewportWidth: 750,
+    //   exclude: [/node_modules\/vant/],
+    // }),
     pxtorem({
       rootValue({ file }) {
         return file.indexOf("node_modules/vant") !== -1 ? 37.5 : 75;

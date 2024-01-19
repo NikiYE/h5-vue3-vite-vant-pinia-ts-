@@ -4,6 +4,24 @@
 @media screen and (min-width: 768px) {
   html {
     /* prettier-ignore */
-    font-size: 50px !important;
+    font-size: 400px !important;
+    --van-cell-font-size: 28px !important;
+    --van-cell-vertical-padding: 20px !important;
+    --van-cell-horizontal-padding: 50px !important;
+    --van-cell-line-height: 40px !important;
+    --van-radio-size: 34px !important;
+    --van-button-default-height: 80px !important;
+    --van-button-mini-font-size: 22px !important;
+    --van-button-mini-height: 48px !important;
+    --van-button-small-font-size: 24px !important;
+    --van-button-small-height: 60px !important;
+    --van-button-primary-height: 72px !important;
+    --van-button-normal-font-size: 34px !important;
+    --van-button-normal-padding: 40px !important;
+    --van-cell-icon-size: 30px !important;
+  }
+  #app {
+    max-width: 780px;
+    margin: 0 auto;
   }
 }
