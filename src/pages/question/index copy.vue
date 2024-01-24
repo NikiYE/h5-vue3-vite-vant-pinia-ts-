@@ -218,7 +218,7 @@
 import { showToast, showLoadingToast, closeToast } from "vant";
 import type { FormInstance } from "vant";
 import type { DatePickerColumnType } from "vant";
-import Api from '@/api/question';
+import Api from '@/api/user';
 
 import shouldShowQuestion from "@/utils/shouldShowQuestion"
 import cleanEmptyProperties from "@/utils/cleanEmptyProperties"
@@ -238,11 +238,7 @@ import {
 
 import SuccessPopup from './components/SuccessPopup.vue'
 import Share from './components/Share.vue'
-import { inject } from 'vue';
-const reload: Function | undefined = inject("reload");
-const updateFun = () => {
-  if (reload) reload();
-}
+
 const formRef = ref<FormInstance>();
 const answerForm = createAnswerForm();
 const route = useRoute();
@@ -259,14 +255,14 @@ const enrollmentDate = ref(["2020", "01"]);
 const onGraduationTimeConfirm = () => {
   // 设置毕业时间
   answerForm.enrollmentTime = "";
-  answerForm.graduationTime = graduationDate.value.toString().replaceAll(",", "-");
+  answerForm.graduationTime = graduationDate.value.toString();
   showGraduationTime.value = false;
 };
 
 const onEnrollmentTimeConfirm = () => {
   // 设置入学时间
   answerForm.graduationTime = "";
-  answerForm.enrollmentTime = enrollmentDate.value.toString().replaceAll(",", "-");
+  answerForm.enrollmentTime = enrollmentDate.value.toString();
   showEnrollmentTime.value = false;
 };
 // 当用户改变毕业状态时，显示相应的日期选择器
@@ -309,7 +305,7 @@ const removePrize = (index: number) => {
 
 const onPrizeTimeConfirm = () => {
   console.log("第几个奖项", editingPrizeIndex.value);
-  console.log("这个奖项选了什么日期", currentPrizeDate.value.toString().replaceAll(",", "-"));
+  console.log("这个奖项选了什么日期", currentPrizeDate.value.toString());
   // 更新当前编辑的奖项的时间
   if (
     answerForm.prize &&
@@ -317,7 +313,7 @@ const onPrizeTimeConfirm = () => {
     answerForm.prize[editingPrizeIndex.value]
   ) {
     answerForm.prize[editingPrizeIndex.value].time =
-      currentPrizeDate.value.toString().replaceAll(",", "-");
+      currentPrizeDate.value.toString();
   }
   // 关闭日期选择器
   showPrizeTime.value = false;
@@ -339,7 +335,7 @@ const onBirthConfirm = () => {
     return
   }
   showBirth.value = false;
-  answerForm.birthDate = currentBirthDate.value.toString().replaceAll(",", "-");
+  answerForm.birthDate = currentBirthDate.value.toString();
   console.log(answerForm.birthDate);
 
   const [birthYear, birthMonth] = answerForm.birthDate.split(",");
@@ -352,37 +348,17 @@ const onBirthConfirm = () => {
   if (currentMonth < parsedBirthMonth) {
     age.value--;
   }
-  console.log(age.value + "岁"); // 输出年龄
-  if (age.value < 18) {
-    //去掉婚姻状况
-  } else if (age.value < 16) {
-    // 去掉最高文化9
-    // 去掉最高学历 10
-    // 去掉最高学历时间 11
-    // 去掉职业 14
-    // 去掉职业职称 16
-  }
+  console.log(age.value); // 输出年龄
+
   // api发送数据 
 
-  const judgePerson = {
-    book_name: bookName,
-    book_id: bookId,
-    problem_1: answerForm.familyName,
-    problem_2: answerForm.firstName,
-    problem_3: answerForm.birthDate,
-  }
-  const judgeQuest = async () => {
-    const { code, result, msg } = await Api.judgeQuest(judgePerson);
-    console.log(code, result, msg);
-    if (code === 300) {
-      showToast(`已有此人：${answerForm.familyName}${answerForm.firstName}(${answerForm.birthDate})，重复填报！`);
-      updateFun()
-    }
+  const login = async () => {
+    const { code, result, message } = await Api.login(loginInfo);
     // do something
   };
-  judgeQuest()
 
-
+  console.log(answerForm.familyName + answerForm.firstName);
+  console.log(answerForm.birthDate);
 };
 
 const showQ10 = ref(false);
@@ -403,8 +379,6 @@ const onPoliticalConfirm = ({
   answerForm.political = selectedOptions[0].text;
   if (selectedOptions[0].needFilling) {
     showOtherGroup.value = true;
-  } else {
-    showOtherGroup.value = false;
   }
 };
 // 民族
@@ -469,10 +443,11 @@ const getPopupStatus = (status: boolean) => {
 const onSubmit = () => {
   console.log(answerForm);
   const answerFormCopy = { ...answerForm }; // 创建一个非响应式副本
-  const newData = convertData(answerFormCopy);
-  cleanEmptyProperties(newData); // 清理副本
-  console.log("!!!!!!!!", newData);
+  console.log(answerFormCopy);
+  cleanEmptyProperties(answerFormCopy); // 清理副本
+  const transformedResult = transformData(answerFormCopy);
 
+  console.log(transformedResult); // 现在可以安全地发送到后端
   formRef.value
     ?.validate()
     .then(() => {
@@ -483,37 +458,10 @@ const onSubmit = () => {
         forbidClick: true,
         duration: 0
       });
-      const judgePerson = {
-        book_name: bookName,
-        book_id: bookId,
-        problem_1: answerForm.familyName,
-        problem_2: answerForm.firstName,
-        problem_3: answerForm.birthDate,
-      }
-      const judgeQuest = async () => {
-        const { code, result, msg } = await Api.judgeQuest(judgePerson);
-        console.log(code, result, msg);
-        if (code === 200) {
-          senForm()
-        } else if (code === 300) {
-          showToast(`已有此人：${answerForm.familyName}${answerForm.firstName}(${answerForm.birthDate})，重复填报！`);
-          updateFun()
-          window.scrollTo(0, 0);
-        }
-        // do something
-      };
-      judgeQuest()
-      const senForm = async () => {
-        const { code, msg } = await Api.questAdd(newData);
-        console.log(code, msg);
-        if (code === 200) {
-          closeToast()
-          showPopup.value = true
-        } else {
-          showToast(msg);
-        }
-      };
-
+      setTimeout(() => {
+        closeToast()
+        showPopup.value = true
+      }, 3000);
     })
     .catch((errors) => {
       // 验证未通过的逻辑
@@ -521,42 +469,51 @@ const onSubmit = () => {
     });
 };
 
-function convertData(oldData: AnswerForm) {
-  // 使用条件操作符检查 oldData.prize 是否存在
-  const prizeString = oldData.prize
-    ? oldData.prize.map(item => `{ name: "${item.name}", time: "${item.time}", employer: "${item.employer}" }`).join(", ")
-    : '';
-
-  // 或者使用 if 语句进行检查
-  let prizeStringIf;
-  if (oldData.prize) {
-    prizeStringIf = oldData.prize.map(item => `{ name: "${item.name}", time: "${item.time}", employer: "${item.employer}" }`).join(", ");
-  } else {
-    prizeStringIf = '';
-  }
-  return {
-    book_id: bookId, // 新增的字段
-    book_name: bookName, // 新增的字段
-    problem_1: oldData.familyName,
-    problem_2: oldData.firstName,
-    problem_3: oldData.birthDate,
-    problem_4: oldData.isLocal,
-    problem_5: oldData.alwaysLocal,
-    problem_6: oldData.gender,
-    problem_7: oldData.nation,
-    // problem_8: { 'answer': oldData.political, 'answer_info': oldData.otherGroup },
-    problem_8: `{ answer: "${oldData.political}", answer_info: "${oldData.otherGroup}" }`,
-    problem_9: oldData.literacy,
-    problem_10: oldData.school,
-    // problem_11: { "answer": oldData.graduationStatus, "answer_info": oldData.graduationTime || oldData.enrollmentTime },
-    problem_11: `{ "answer": "${oldData.graduationStatus}", "answer_info": "${oldData.graduationTime || oldData.enrollmentTime}" }`,
-    problem_12: oldData.maritalStatus,
-    problem_13: oldData.armyServe,
-    problem_14: oldData.occupation,
-    problem_15: oldData.rank,
-    problem_16: `[${prizeString}]`, //将对象数组转为字符串再发给后端
+// 修改发送数据的格式
+const transformData = (data: AnswerForm) => {
+  const transformed: Transformed = {
+    book_name: bookName,
+    book_id: bookId,
+    answers: []
   };
-}
+  // 遍历原始数据
+  for (const key in data) {
+    if (data.hasOwnProperty(key) && !['prize', 'otherGroup', 'graduationTime', 'enrollmentTime'].includes(key)) {
+      let questionEntry = {
+        question_id: (keyToQuestionIdMap as any)[key],
+        answer: (data as any)[key],
+        answer_info: ''
+      };
+      // 特殊处理政治面貌和毕业情况
+      if (key === 'political' && data.otherGroup) {
+        questionEntry.answer_info = data.otherGroup;
+      } else if (key === 'graduationStatus') {
+        if (data.graduationTime) {
+          questionEntry.answer_info = data.graduationTime;
+        } else if (data.enrollmentTime) {
+          questionEntry.answer_info = data.enrollmentTime;
+        }
+      }
+
+      transformed.push(questionEntry);
+    }
+  }
+  // 特殊处理奖项
+  if (data.prize !== undefined && data.prize) {
+    const prizeAnswers = data.prize.map(prize => ({
+      name: prize.name,
+      time: prize.time,
+      employer: prize.employer
+    }));
+    transformed.answers.push({
+      question_id: 15,
+      answer: prizeAnswers
+    });
+  }
+  return transformed;
+};
+
+
 
 </script>
 <style lang="scss" scoped>

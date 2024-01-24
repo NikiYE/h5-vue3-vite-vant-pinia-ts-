@@ -26,7 +26,7 @@ service.interceptors.request.use(
   },
   (error: AxiosError) => {
     return Promise.reject(error);
-  },
+  }
 );
 
 // axios实例拦截响应
@@ -57,7 +57,7 @@ service.interceptors.response.use(
   (error: AxiosError) => {
     Toast.fail("Network Error...");
     return Promise.reject(error);
-  },
+  }
 );
 
 export type { AxiosResponse, AxiosRequestConfig };

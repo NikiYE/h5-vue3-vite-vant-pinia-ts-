@@ -5,23 +5,31 @@
   html {
     /* prettier-ignore */
     font-size: 400px !important;
-    --van-cell-font-size: 28px !important;
     --van-cell-vertical-padding: 20px !important;
-    --van-cell-horizontal-padding: 50px !important;
+    // --van-cell-horizontal-padding: 50px !important;
     --van-cell-line-height: 40px !important;
     --van-radio-size: 34px !important;
+    // 按钮高度
     --van-button-default-height: 80px !important;
-    --van-button-mini-font-size: 22px !important;
     --van-button-mini-height: 48px !important;
-    --van-button-small-font-size: 24px !important;
     --van-button-small-height: 60px !important;
-    --van-button-primary-height: 72px !important;
-    --van-button-normal-font-size: 34px !important;
-    --van-button-normal-padding: 40px !important;
+
     --van-cell-icon-size: 30px !important;
+    //错误提示
+    --van-field-error-message-font-size: 24px !important;
+    //
+    --van-font-size-lg: 32px !important;
+    --van-font-size-md: 28px !important;
+    --van-font-size-sm: 24px !important;
+    --van-font-size-xs: 20px !important;
+    --van-padding-md: 50px !important;
   }
   #app {
     max-width: 780px;
     margin: 0 auto;
+  }
+  .van-popup--bottom {
+    // max-width: 780px;
+    // left: calc(50% - 390px) !important;
   }
 }

@@ -30,8 +30,8 @@ export interface AnswerForm {
 }
 export interface Option {
   text: string;
-  id: string;
-  value: string;
+  id?: string;
+  value?: string;
   skip?: string;
   needFilling?: boolean;
 }
@@ -89,8 +89,8 @@ export const keyToQuestionIdMap = {
   maritalStatus: 12,
   armyServe: 13,
   occupation: 14,
-  rank: 16,
-  prize: 15,
+  rank: 15,
+  prize: 16,
 };
 
 const oldData = {
@@ -177,7 +177,7 @@ const sendData = {
       answer: "外出干部",
     },
     {
-      question_id: 16,
+      question_id: 15,
       answer: "大法师",
     },
     {

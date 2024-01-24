@@ -90,13 +90,13 @@ export default ({ command, mode }) => {
         allow: [".."], // '..' 表示上一级目录，允许访问 node_modules
       },
       host: "0.0.0.0", // 允许局域网访问
-      // proxy: {
-      //   '/api': {
-      //     target: 'http://192.168.1.9:9090/zjdsj',  //  java 7:后端电脑本地/9 这里是你的后端服务器地址
-      //     changeOrigin: true,  // 为了使服务器认为请求是从受信任的源发出的，需要更改源
-      //     rewrite: (path) => path.replace(/^\/api/, '')  // 这将移除 /api 前缀
-      //   },
-      // },
+      proxy: {
+        "/api": {
+          target: "http://192.168.1.7:6655", //  java 7:后端电脑本地/9 这里是你的后端服务器地址
+          changeOrigin: true, // 为了使服务器认为请求是从受信任的源发出的，需要更改源
+          rewrite: (path) => path.replace(/^\/api/, ""), // 这将移除 /api 前缀
+        },
+      },
       hmr: true, //热更新
     },
   });
